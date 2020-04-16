@@ -13,7 +13,7 @@ public class ZooKeeperLock {
 
 
     public ZooKeeperLock(){
-        zkClient = new ZkClient("111.230.99.82：2181",5000,20000);
+        zkClient = new ZkClient("111.230.99.82",5000,20000);
     }
     /**
      * 获得锁
@@ -51,7 +51,7 @@ public class ZooKeeperLock {
     public static void main(String [] args){
         ZkClient zkClient = new ZkClient("111.230.99.82", 5000, 20000);
        // zkClient.create("/songjie-lock","1314", CreateMode.PERSISTENT);
-        String path = zkClient.createEphemeralSequential("/songjie-lock/" + 3, "w");
+        String path = zkClient.createEphemeralSequential("/songjie-lock/zkdemo", "w");
         System.out.println(path);
     }
 }
