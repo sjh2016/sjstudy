@@ -2,6 +2,7 @@ package com.example.demo.zookeeper;
 
 
 import org.I0Itec.zkclient.ZkClient;
+import org.apache.zookeeper.CreateMode;
 
 /**
  * 创建临时的循序节点。
@@ -12,7 +13,7 @@ public class ZooKeeperLock {
 
 
     public ZooKeeperLock(){
-        zkClient = new ZkClient("xxx",5000,20000);
+        zkClient = new ZkClient("111.230.99.82：2181",5000,20000);
     }
     /**
      * 获得锁
@@ -42,7 +43,15 @@ public class ZooKeeperLock {
     }
 
     public Lock createLockNode(String lockId){
-        String path = zkClient.createEphemeralSequential("/songjie-lock/" + lockId, "w");
+        String path = zkClient.createEphemeralSequential("/demo/" + lockId, "w");
+        //zkClient.subscribeDataChanges();
         return null;
+    }
+
+    public static void main(String [] args){
+        ZkClient zkClient = new ZkClient("111.230.99.82", 5000, 20000);
+       // zkClient.create("/songjie-lock","1314", CreateMode.PERSISTENT);
+        String path = zkClient.createEphemeralSequential("/songjie-lock/" + 3, "w");
+        System.out.println(path);
     }
 }
